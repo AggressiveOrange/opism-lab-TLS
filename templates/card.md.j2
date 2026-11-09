@@ -1,0 +1,12 @@
+# Варіант {{ s.id }}{% if s.name %} ({{ s.name }}){% endif %}
+
+**Доступ до терміналу:** http://<адреса стенду>:{{ s.port }}/  логін `{{ s.id }}`{% if s.show_password %}  пароль `{{ s.password }}`{% endif %}
+**Зона:** `{{ s.id }}.lab`  **Ваш сервер:** `{{ s.ip }}`  **Резолвер:** `10.53.0.53`
+
+| Призначення | Ім'я |
+|---|---|
+| Віддалений сервер (завдання 1, 2, 5) | `{{ s.remote }}.{{ s.id }}.lab` |
+| Імена для вашого сертифіката (завдання 3) | `www.{{ s.id }}.lab`, `{{ s.alias }}.{{ s.id }}.lab` |
+| Сервери для діагностики (завдання 4) | {% for f in s.faults %}`f{{ loop.index }}.{{ s.id }}.lab`{% if not loop.last %}, {% endif %}{% endfor %} |
+| Каталог ACME | `https://ca.lab:14000/dir` |
+| Корінь стенда | `/lab/pki/stand-root.crt` (змінна `$STAND_CA`) |

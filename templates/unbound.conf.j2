@@ -1,0 +1,26 @@
+# {{ name }}. Generated.
+server:
+    verbosity: 1
+    interface: 0.0.0.0
+    port: 53
+    do-ip6: no
+    access-control: 10.53.0.0/16 allow
+    access-control: 127.0.0.0/8 allow
+    username: ""
+    chroot: ""
+    directory: "/lab"
+    pidfile: ""
+    use-syslog: no
+    logfile: ""
+    root-hints: "/lab/root.hints"
+    # Fake root is not signed: no trust anchor, no DNSSEC validation.
+    module-config: "iterator"
+    qname-minimisation: no
+    prefetch: no
+    infra-host-ttl: 60
+    infra-cache-max-rtt: 3000
+
+remote-control:
+    control-enable: yes
+    control-interface: 127.0.0.1
+    control-use-cert: no

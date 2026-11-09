@@ -1,0 +1,29 @@
+# Your HTTPS server. Ready to use: only put the certificate and key into /lab/tls/.
+user www-data;
+worker_processes 1;
+pid /run/nginx-lab.pid;
+events { worker_connections 256; }
+http {
+    access_log /var/log/nginx/access.log;
+    error_log  /var/log/nginx/error.log;
+    default_type text/plain;
+
+    # HTTP: answers ACME HTTP-01 challenges, everything else gets a plain reply.
+    server {
+        listen 80 default_server;
+        location /.well-known/acme-challenge/ { root /var/www/acme; }
+        location / { return 200 "server: {{ s.id }} (http)\nHost: $host\n"; }
+    }
+
+    # HTTPS for www.{{ s.id }}.lab and {{ s.alias }}.{{ s.id }}.lab
+    server {
+        listen 443 ssl default_server;
+        server_name www.{{ s.id }}.lab {{ s.alias }}.{{ s.id }}.lab;
+        ssl_protocols TLSv1.2 TLSv1.3;
+        ssl_certificate     /lab/tls/server.crt;
+        ssl_certificate_key /lab/tls/server.key;
+        location / {
+            return 200 "server: {{ s.id }} (https)\nHost: $host\nSNI: $ssl_server_name\nprotocol: $ssl_protocol\n";
+        }
+    }
+}

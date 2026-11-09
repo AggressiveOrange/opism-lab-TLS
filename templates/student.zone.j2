@@ -1,0 +1,21 @@
+; Zone {{ s.id }}.lab for the TLS lab. Everything needed is already here; no edits are required.
+$TTL 300
+@     IN SOA ns.{{ s.id }}.lab. admin.{{ s.id }}.lab. (
+            {{ serial }}01 ; serial
+            3600       ; refresh
+            600        ; retry
+            86400      ; expire
+            60         ; minimum
+        )
+@     IN NS ns.{{ s.id }}.lab.
+ns      IN A  {{ s.ip }}
+
+; your own HTTPS server (task 3)
+www     IN A  {{ s.ip }}
+{{ s.alias }}{{ ' ' * (8 - s.alias|length) }}IN CNAME www
+
+; remote server (tasks 1, 2, 5) and servers with certificate faults (task 4)
+{{ s.remote }}{{ ' ' * (8 - s.remote|length) }}IN A  10.53.0.80
+{% for f in s.faults -%}
+f{{ loop.index }}      IN A  10.53.0.80
+{% endfor %}

@@ -1,0 +1,34 @@
+# web: the remote HTTPS server. Echoes what arrived; one server block per name (chosen by SNI).
+user www-data;
+worker_processes 1;
+pid /tmp/nginx.pid;
+events { worker_connections 512; }
+http {
+    access_log /dev/stdout;
+    error_log  /dev/stderr;
+    default_type text/plain;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    keepalive_timeout 75s;
+{% for s in students %}
+    # --- {{ s.id }}
+    server {
+        listen 80{% if loop.first %} default_server{% endif %};
+        listen 443 ssl http2{% if loop.first %} default_server{% endif %};
+        server_name {{ s.remote }}.{{ s.id }}.lab;
+        ssl_certificate     /pki/web/{{ s.remote }}.{{ s.id }}.lab.crt;
+        ssl_certificate_key /pki/web/{{ s.remote }}.{{ s.id }}.lab.key;
+        location / {
+            return 200 "server: web\nHost: $host\nSNI: $ssl_server_name\nprotocol: $server_protocol $ssl_protocol\nclient: $remote_addr\n";
+        }
+    }
+{%- for f in s.faults %}
+    server {
+        listen 443 ssl http2;
+        server_name f{{ loop.index }}.{{ s.id }}.lab;
+        ssl_certificate     /pki/web/f{{ loop.index }}.{{ s.id }}.lab.crt;
+        ssl_certificate_key /pki/web/f{{ loop.index }}.{{ s.id }}.lab.key;
+        location / { return 200 "server: web, f{{ loop.index }}\n"; }
+    }
+{%- endfor %}
+{% endfor %}
+}
