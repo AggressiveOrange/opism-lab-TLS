@@ -33,13 +33,42 @@
 Вивід кроку 1.1:
 
 ```text
-
+[1] 100
+tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
+listening on eth0, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+server: web
+Host: vault.se-201-28.lab
+SNI: 
+protocol: HTTP/1.1 
+client: 10.53.1.1
+10 packets captured
+10 packets received by filter
+0 packets dropped by kernel
+[1]+  Exit 124                timeout 8 tcpdump -ni eth0 -A -s0 -l 'host 10.53.0.80 and tcp port 80' > t1-http.txt
+18:22:38.024399 IP 10.53.1.1.49494 > 10.53.0.80.80: Flags [P.], seq 1:83, ack 1, win 502, options [nop,nop,TS val 3363169046 ecr 2800505187], length 82: HTTP: GET / HTTP/1.1
+.u....QcGET / HTTP/1.1
+Host: vault.se-201-28.lab
+server: web
+Host: vault.se-201-28.lab
 ```
 
 Вивід кроку 1.2:
 
 ```text
-
+[1] 106
+tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
+listening on eth0, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+server: web
+Host: vault.se-201-28.lab
+SNI: vault.se-201-28.lab
+protocol: HTTP/2.0 TLSv1.3
+client: 10.53.1.1
+22 packets captured
+22 packets received by filter
+0 packets dropped by kernel
+[1]+  Exit 124                timeout 8 tcpdump -ni eth0 -A -s0 -l 'host 10.53.0.80 and tcp port 443' > t1-https.txt
+0
+1
 ```
 
 | Що шукали в дампі | HTTP | HTTPS |
