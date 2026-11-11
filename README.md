@@ -187,6 +187,20 @@ ALPN protocol: h2
 | 8 | К→С | ChangeCipherSpec | — | — | — |
 | 9 | К→С | ApplicationData | Handshake | Finished | 48 |
 | 10 | К→С | ApplicationData | Alert | — | — |
+| 11 | К→С | Handshake | — | ClientHello | 225 |
+| 12 | С→К | Handshake | — | ServerHello | 74 |
+| 13 | С→К | Handshake | — | Certificate | 982 |
+| 14 | С→К | Handshake | — | ServerKeyExchange | 110 |
+| 15 | С→К | Handshake | — | ServerHelloDone | 0 |
+| 16 | К→С | Handshake | — | ClientKeyExchange | 33 |
+| 17 | К→С | ChangeCipherSpec | — | — | — |
+| 18 | К→С | Handshake | — | Finished | 12 |
+| 19 | С→К | Handshake | — | NewSessionTicket | 214 |
+| 20 | С→К | ChangeCipherSpec | — | — | — |
+| 21 | С→К | Handshake | — | Finished | 12 |
+| 22 | С→К | ApplicationData | — | — | — |
+| 23 | К→С | Alert | — | — | — |
+
 
 Вивід кроків 2.3 і 2.4:
 
