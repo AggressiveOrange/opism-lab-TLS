@@ -268,27 +268,7 @@ how to fix it, please visit the web page mentioned above.
 Вивід кроку 3.3 (останні рядки `lego` і рядки журналу nginx):
 
 ```text
-2026/11/11 15:12:25 No key found for account admin@se-201-28.lab. Generating a P256 key.
-2026/11/11 15:12:25 Saved key to /lab/work/lego/accounts/ca.lab_14000/admin@se-201-28.lab/keys/admin@se-201-28.lab.key
-2026/11/11 15:12:25 [INFO] acme: Registering account for admin@se-201-28.lab
-!!!! HEADS UP !!!!
 
-Your account credentials have been saved in your Let's Encrypt
-configuration directory at "/lab/work/lego/accounts".
-
-You should make a secure backup of this folder now. This
-configuration directory will also contain certificates and
-private keys obtained from Let's Encrypt so making regular
-backups of this folder is ideal.
-2026/11/11 15:12:25 [INFO] [www.se-201-28.lab, news.se-201-28.lab] acme: Obtaining SAN certificate
-2026/11/11 15:12:25 [INFO] [news.se-201-28.lab] AuthURL: https://ca.lab:14000/authZ/KbSlfdiczodNmLiO2Jq8ccalSxjnCnTSomPludsl290
-2026/11/11 15:12:25 [INFO] [www.se-201-28.lab] AuthURL: https://ca.lab:14000/authZ/QZYxO6jacqbSZ7LiSejDir27C84ZAlD5MUeMWbnk7io
-2026/11/11 15:12:25 [INFO] [news.se-201-28.lab] acme: Could not find solver for: tls-alpn-01
-2026/11/11 15:12:25 [INFO] [news.se-201-28.lab] acme: use http-01 solver
-2026/11/11 15:12:25 [INFO] [www.se-201-28.lab] acme: Could not find solver for: tls-alpn-01
-2026/11/11 15:12:25 [INFO] [www.se-201-28.lab] acme: use http-01 solver
-2026/11/11 15:12:25 [INFO] [news.se-201-28.lab] acme: Trying to solve HTTP-01
-2026/11/11 15:12:32 [INFO] [news.se-201-28.lab] The server validated our request
 2026/11/11 15:12:32 [INFO] [www.se-201-28.lab] acme: Trying to solve HTTP-01
 2026/11/11 15:12:35 [INFO] [www.se-201-28.lab] The server validated our request
 2026/11/11 15:12:35 [INFO] [www.se-201-28.lab, news.se-201-28.lab] acme: Validations succeeded; requesting certificates
