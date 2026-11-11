@@ -252,31 +252,117 @@ ClientHello у TLS 1.3 довший тому, що він містить дод�
 Вивід кроків 3.1 і 3.2:
 
 ```text
+збережено /lab/tls/acme-root.crt
+subject=CN = Pebble Root CA 747649
+notBefore=Nov 11 14:14:55 2026 GMT
+notAfter=Nov 11 14:14:55 2056 GMT
 
+curl: (60) SSL certificate problem: self-signed certificate
+More details here: https://curl.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+how to fix it, please visit the web page mentioned above.
 ```
 
 Вивід кроку 3.3 (останні рядки `lego` і рядки журналу nginx):
 
 ```text
+2026/11/11 15:12:25 No key found for account admin@se-201-28.lab. Generating a P256 key.
+2026/11/11 15:12:25 Saved key to /lab/work/lego/accounts/ca.lab_14000/admin@se-201-28.lab/keys/admin@se-201-28.lab.key
+2026/11/11 15:12:25 [INFO] acme: Registering account for admin@se-201-28.lab
+!!!! HEADS UP !!!!
 
+Your account credentials have been saved in your Let's Encrypt
+configuration directory at "/lab/work/lego/accounts".
+
+You should make a secure backup of this folder now. This
+configuration directory will also contain certificates and
+private keys obtained from Let's Encrypt so making regular
+backups of this folder is ideal.
+2026/11/11 15:12:25 [INFO] [www.se-201-28.lab, news.se-201-28.lab] acme: Obtaining SAN certificate
+2026/11/11 15:12:25 [INFO] [news.se-201-28.lab] AuthURL: https://ca.lab:14000/authZ/KbSlfdiczodNmLiO2Jq8ccalSxjnCnTSomPludsl290
+2026/11/11 15:12:25 [INFO] [www.se-201-28.lab] AuthURL: https://ca.lab:14000/authZ/QZYxO6jacqbSZ7LiSejDir27C84ZAlD5MUeMWbnk7io
+2026/11/11 15:12:25 [INFO] [news.se-201-28.lab] acme: Could not find solver for: tls-alpn-01
+2026/11/11 15:12:25 [INFO] [news.se-201-28.lab] acme: use http-01 solver
+2026/11/11 15:12:25 [INFO] [www.se-201-28.lab] acme: Could not find solver for: tls-alpn-01
+2026/11/11 15:12:25 [INFO] [www.se-201-28.lab] acme: use http-01 solver
+2026/11/11 15:12:25 [INFO] [news.se-201-28.lab] acme: Trying to solve HTTP-01
+2026/11/11 15:12:32 [INFO] [news.se-201-28.lab] The server validated our request
+2026/11/11 15:12:32 [INFO] [www.se-201-28.lab] acme: Trying to solve HTTP-01
+2026/11/11 15:12:35 [INFO] [www.se-201-28.lab] The server validated our request
+2026/11/11 15:12:35 [INFO] [www.se-201-28.lab, news.se-201-28.lab] acme: Validations succeeded; requesting certificates
+2026/11/11 15:12:35 [INFO] Wait for certificate [timeout: 30s, interval: 500ms]
+2026/11/11 15:12:35 [INFO] [www.se-201-28.lab] Server responded with a certificate.
+10.53.0.10 - - [11/Nov/2026:15:12:25 +0000] "GET /.well-known/acme-challenge/kRVDEi7otpfkvoiDONx9f8jbHNFDpd1W0ER0gHCVYKI HTTP/1.1" 200 87 "-" "LetsEncrypt-Pebble-VA (linux; amd64)"
+10.53.0.10 - - [11/Nov/2026:15:12:25 +0000] "GET /.well-known/acme-challenge/kRVDEi7otpfkvoiDONx9f8jbHNFDpd1W0ER0gHCVYKI HTTP/1.1" 200 87 "-" "LetsEncrypt-Pebble-VA (linux; amd64)"
+10.53.0.10 - - [11/Nov/2026:15:12:25 +0000] "GET /.well-known/acme-challenge/kRVDEi7otpfkvoiDONx9f8jbHNFDpd1W0ER0gHCVYKI HTTP/1.1" 200 87 "-" "LetsEncrypt-Pebble-VA (linux; amd64)"
+10.53.0.10 - - [11/Nov/2026:15:12:32 +0000] "GET /.well-known/acme-challenge/wabFpUwa0GgFD35xNEu0FKyaoOA9lzlqF2Rn-cLfOiY HTTP/1.1" 200 87 "-" "LetsEncrypt-Pebble-VA (linux; amd64)"
+10.53.0.10 - - [11/Nov/2026:15:12:32 +0000] "GET /.well-known/acme-challenge/wabFpUwa0GgFD35xNEu0FKyaoOA9lzlqF2Rn-cLfOiY HTTP/1.1" 200 87 "-" "LetsEncrypt-Pebble-VA (linux; amd64)"
+10.53.0.10 - - [11/Nov/2026:15:12:32 +0000] "GET /.well-known/acme-challenge/wabFpUwa0GgFD35xNEu0FKyaoOA9lzlqF2Rn-cLfOiY HTTP/1.1" 200 87 "-" "LetsEncrypt-Pebble-VA (linux; amd64)"
 ```
 
 Вивід кроку 3.4:
 
 ```text
-
+subject=CN = www.se-201-28.lab
+issuer=CN = Pebble Intermediate CA 224b7a
+notBefore=Nov 11 15:12:35 2026 GMT
+notAfter=Nov 11 15:12:34 2031 GMT
+serial=3A388027D0CAC107
+X509v3 Subject Alternative Name: 
+    DNS:www.se-201-28.lab, DNS:news.se-201-28.lab
+subject=CN = Pebble Intermediate CA 224b7a
+issuer=CN = Pebble Root CA 747649
 ```
 
 Вивід кроку 3.5:
 
 ```text
+nginx: the configuration file /lab/nginx.conf syntax is ok
+nginx: configuration file /lab/nginx.conf test is successful
+2026/11/11 15:16:30 [notice] 111#111: signal process started
+curl: (60) SSL certificate problem: unable to get local issuer certificate
+More details here: https://curl.se/docs/sslcerts.html
 
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+how to fix it, please visit the web page mentioned above.
+Certificate chain
+ 0 s:CN = www.se-201-28.lab
+   i:CN = Pebble Intermediate CA 224b7a
+   a:PKEY: id-ecPublicKey, 256 (bit); sigalg: RSA-SHA256
+   v:NotBefore: Nov 11 15:12:35 2026 GMT; NotAfter: Nov 11 15:12:34 2031 GMT
+---
+Verify return code: 21 (unable to verify the first certificate)
 ```
 
 Вивід кроку 3.6:
 
 ```text
+nginx: the configuration file /lab/nginx.conf syntax is ok
+nginx: configuration file /lab/nginx.conf test is successful
+2026/11/11 15:17:31 [notice] 119#119: signal process started
 
+server: se-201-28 (https)
+Host: www.se-201-28.lab
+SNI: www.se-201-28.lab
+protocol: TLSv1.3
+Certificate chain
+ 0 s:CN = www.se-201-28.lab
+   i:CN = Pebble Intermediate CA 224b7a
+   a:PKEY: id-ecPublicKey, 256 (bit); sigalg: RSA-SHA256
+   v:NotBefore: Nov 11 15:12:35 2026 GMT; NotAfter: Nov 11 15:12:34 2031 GMT
+ 1 s:CN = Pebble Intermediate CA 224b7a
+   i:CN = Pebble Root CA 747649
+   a:PKEY: rsaEncryption, 2048 (bit); sigalg: RSA-SHA256
+   v:NotBefore: Nov 11 14:14:55 2026 GMT; NotAfter: Nov 11 14:14:55 2056 GMT
+---
+Verify return code: 0 (ok)
+server: se-201-28 (https)
+Host: news.se-201-28.lab
+SNI: news.se-201-28.lab
+protocol: TLSv1.3
 ```
 
 | Параметр | Значення |
