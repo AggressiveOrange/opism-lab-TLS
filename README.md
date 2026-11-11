@@ -177,7 +177,16 @@ ALPN protocol: h2
 
 | № | Напрям | `Content Type` | `Inner Content Type` | Повідомлення | `Length` |
 |---|---|---|---|---|---|
-| 1 | | | | | |
+| 1 | К→С | Handshake | — | ClientHello | 330 |
+| 2 | С→К | Handshake | — | ServerHello | 118 |
+| 3 | С→К | ChangeCipherSpec | — | — | — |
+| 4 | С→К | ApplicationData | Handshake | EncryptedExtensions | 15 |
+| 5 | С→К | ApplicationData | Handshake | Certificate | 987 |
+| 6 | С→К | ApplicationData | Handshake | CertificateVerify | 75 |
+| 7 | С→К | ApplicationData | Handshake | Finished | 48 |
+| 8 | К→С | ChangeCipherSpec | — | — | — |
+| 9 | К→С | ApplicationData | Handshake | Finished | 48 |
+| 10 | К→С | ApplicationData | Alert | — | — |
 
 Вивід кроків 2.3 і 2.4:
 
