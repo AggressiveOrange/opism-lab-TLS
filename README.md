@@ -92,13 +92,85 @@ client: 10.53.1.1
 Вивід кроку 2.1 (TLS 1.3):
 
 ```text
-
+Sent Record
+  Content Type = Handshake (22)
+    ClientHello, Length=330
+Received Record
+  Content Type = Handshake (22)
+    ServerHello, Length=118
+Received Record
+  Content Type = ChangeCipherSpec (20)
+Received Record
+  Content Type = ApplicationData (23)
+  Inner Content Type = Handshake (22)
+    EncryptedExtensions, Length=15
+Received Record
+  Content Type = ApplicationData (23)
+  Inner Content Type = Handshake (22)
+    Certificate, Length=987
+Received Record
+  Content Type = ApplicationData (23)
+  Inner Content Type = Handshake (22)
+    CertificateVerify, Length=75
+Received Record
+  Content Type = ApplicationData (23)
+  Inner Content Type = Handshake (22)
+    Finished, Length=48
+Sent Record
+  Content Type = ChangeCipherSpec (20)
+Sent Record
+  Content Type = ApplicationData (23)
+  Inner Content Type = Handshake (22)
+    Finished, Length=48
+Sent Record
+  Content Type = ApplicationData (23)
+  Inner Content Type = Alert (21)
+New, TLSv1.3, Cipher is TLS_AES_256_GCM_SHA384
+ALPN protocol: h2
+Verify return code: 0 (ok)
 ```
 
 Вивід кроку 2.2 (TLS 1.2):
 
 ```text
-
+Sent Record
+  Content Type = Handshake (22)
+    ClientHello, Length=225
+Received Record
+  Content Type = Handshake (22)
+    ServerHello, Length=74
+Received Record
+  Content Type = Handshake (22)
+    Certificate, Length=982
+Received Record
+  Content Type = Handshake (22)
+    ServerKeyExchange, Length=110
+Received Record
+  Content Type = Handshake (22)
+    ServerHelloDone, Length=0
+Sent Record
+  Content Type = Handshake (22)
+    ClientKeyExchange, Length=33
+Sent Record
+  Content Type = ChangeCipherSpec (20)
+Sent Record
+  Content Type = Handshake (22)
+    Finished, Length=12
+Received Record
+  Content Type = Handshake (22)
+    NewSessionTicket, Length=214
+Received Record
+  Content Type = ChangeCipherSpec (20)
+Received Record
+  Content Type = Handshake (22)
+    Finished, Length=12
+Received Record
+  Content Type = ApplicationData (23)
+Sent Record
+  Content Type = Alert (21)
+New, TLSv1.2, Cipher is ECDHE-ECDSA-AES256-GCM-SHA384
+ALPN protocol: h2
+    Verify return code: 0 (ok)
 ```
 
 <!-- Один рядок на кожен запис з виводу 2.1, у тому самому порядку. Напрям: К→С або С→К. -->
