@@ -107,11 +107,11 @@ Received Record
 Received Record
   Content Type = ApplicationData (23)
   Inner Content Type = Handshake (22)
-    Certificate, Length=987
+    Certificate, Length=986
 Received Record
   Content Type = ApplicationData (23)
   Inner Content Type = Handshake (22)
-    CertificateVerify, Length=75
+    CertificateVerify, Length=74
 Received Record
   Content Type = ApplicationData (23)
   Inner Content Type = Handshake (22)
@@ -141,7 +141,7 @@ Received Record
     ServerHello, Length=74
 Received Record
   Content Type = Handshake (22)
-    Certificate, Length=982
+    Certificate, Length=981
 Received Record
   Content Type = Handshake (22)
     ServerKeyExchange, Length=110
@@ -181,15 +181,15 @@ ALPN protocol: h2
 | 2 | С→К | Handshake | — | ServerHello | 118 |
 | 3 | С→К | ChangeCipherSpec | — | — | — |
 | 4 | С→К | ApplicationData | Handshake | EncryptedExtensions | 15 |
-| 5 | С→К | ApplicationData | Handshake | Certificate | 987 |
-| 6 | С→К | ApplicationData | Handshake | CertificateVerify | 75 |
+| 5 | С→К | ApplicationData | Handshake | Certificate | 986 |
+| 6 | С→К | ApplicationData | Handshake | CertificateVerify | 74 |
 | 7 | С→К | ApplicationData | Handshake | Finished | 48 |
 | 8 | К→С | ChangeCipherSpec | — | — | — |
 | 9 | К→С | ApplicationData | Handshake | Finished | 48 |
 | 10 | К→С | ApplicationData | Alert | — | — |
 | 11 | К→С | Handshake | — | ClientHello | 225 |
 | 12 | С→К | Handshake | — | ServerHello | 74 |
-| 13 | С→К | Handshake | — | Certificate | 982 |
+| 13 | С→К | Handshake | — | Certificate | 981 |
 | 14 | С→К | Handshake | — | ServerKeyExchange | 110 |
 | 15 | С→К | Handshake | — | ServerHelloDone | 0 |
 | 16 | К→С | Handshake | — | ClientKeyExchange | 33 |
@@ -200,7 +200,6 @@ ALPN protocol: h2
 | 21 | С→К | Handshake | — | Finished | 12 |
 | 22 | С→К | ApplicationData | — | — | — |
 | 23 | К→С | Alert | — | — | — |
-
 
 Вивід кроків 2.3 і 2.4:
 
