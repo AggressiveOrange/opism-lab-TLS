@@ -33,7 +33,7 @@
 Вивід кроку 1.1:
 
 ```text
-[1] 100
+[1] 43
 tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
 listening on eth0, link-type EN10MB (Ethernet), snapshot length 262144 bytes
 server: web
@@ -45,8 +45,8 @@ client: 10.53.1.1
 10 packets received by filter
 0 packets dropped by kernel
 [1]+  Exit 124                timeout 8 tcpdump -ni eth0 -A -s0 -l 'host 10.53.0.80 and tcp port 80' > t1-http.txt
-18:22:38.024399 IP 10.53.1.1.49494 > 10.53.0.80.80: Flags [P.], seq 1:83, ack 1, win 502, options [nop,nop,TS val 3363169046 ecr 2800505187], length 82: HTTP: GET / HTTP/1.1
-.u....QcGET / HTTP/1.1
+14:26:23.700292 IP 10.53.1.1.33162 > 10.53.0.80.80: Flags [P.], seq 1:83, ack 1, win 502, options [nop,nop,TS val 2088482448 ecr 2851576999], length 82: HTTP: GET / HTTP/1.1
+|{......GET / HTTP/1.1
 Host: vault.se-201-28.lab
 server: web
 Host: vault.se-201-28.lab
@@ -55,7 +55,7 @@ Host: vault.se-201-28.lab
 Вивід кроку 1.2:
 
 ```text
-[1] 106
+[1] 49
 tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
 listening on eth0, link-type EN10MB (Ethernet), snapshot length 262144 bytes
 server: web
@@ -76,7 +76,7 @@ client: 10.53.1.1
 | рядок запиту `GET /` | GET / HTTP/1.1 | 0 |
 | заголовок `Host` | vault.se-201-28.lab | vault.se-201-28.lab |
 | тіло відповіді (`server: web`) | server: web | — |
-| ім'я віддаленого сервера (кількість входжень) | vault.se-201-28.lab (3) | vault.se-201-28.lab (2) |
+| ім'я віддаленого сервера (кількість входжень) | vault.se-201-28.lab (2) | vault.se-201-28.lab (1) |
 
 1. У якому повідомленні і в якому полі передається ім'я сервера, яке видно в дампі HTTPS?<br>
 Ім'я сервера передається в TLS-повідомленні ClientHello в полі server_name.
