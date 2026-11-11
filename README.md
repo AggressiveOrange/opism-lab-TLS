@@ -204,16 +204,36 @@ ALPN protocol: h2
 Вивід кроків 2.3 і 2.4:
 
 ```text
+extension_type=server_name(0), length=24
+  0000 - 00 16 00 00 13 76 61 75-6c 74 2e 73 65 2d 32   .....vault.se-2
+  000f - 30 31 2d 32 38 2e 6c 61-62                     01-28.lab
+extension_type=ec_point_formats(11), length=4
 
+[1] 65
+tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
+listening on eth0, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+23 packets captured
+23 packets received by filter
+0 packets dropped by kernel
+[1]+  Exit 124                timeout 6 tcpdump -ni eth0 -A -s0 -l 'host 10.53.0.80 and tcp port 443' > t2-dump-$v.txt
+TLS 1.3: 0
+[1] 71
+tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
+listening on eth0, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+21 packets captured
+21 packets received by filter
+0 packets dropped by kernel
+[1]+  Exit 124                timeout 6 tcpdump -ni eth0 -A -s0 -l 'host 10.53.0.80 and tcp port 443' > t2-dump-$v.txt
+TLS 1.2: 2
 ```
 
 | Показник | TLS 1.3 | TLS 1.2 |
 |---|---|---|
-| Довжина ClientHello, байт | | |
-| Номер першого запису, тип якого спостерігач не бачить | | |
-| Кількість RTT від ClientHello до першого HTTP-запиту | | |
-| Чи видно сертифікат у дампі (результат 2.4) | | |
-| Обраний протокол ALPN | | |
+| Довжина ClientHello, байт | 330 | 225 |
+| Номер першого запису, тип якого спостерігач не бачить | 4 | 8 |
+| Кількість RTT від ClientHello до першого HTTP-запиту | 1 | 2 |
+| Чи видно сертифікат у дампі (результат 2.4) | Ні (0) | Так (2) |
+| Обраний протокол ALPN | h2 | h2 |
 
 1. За якими рядками виводу 2.1 визначено, з якого запису починається шифрування? Що бачить спостерігач замість типу кожного наступного запису?
 
