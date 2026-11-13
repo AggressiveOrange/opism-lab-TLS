@@ -483,7 +483,7 @@ RTT, визначений вимірюванням, і з якого значе�
 RTT = 20.3 мс. Визначено як різницю між медіанними значеннями time_connect і time_namelookup для нових з'єднань TLS 1.3 та TLS 1.2.
 
 1. Виразіть кожне виміряне значення через RTT. Де вимірювання відрізняється від цілого числа RTT і чим це пояснюється?<br>
-Виміряний RTT становить приблизно 20.3 мс. Для нового з'єднання TLS 1.3 значення time_namelookup = 1 RTT, time_connect = 2 RTT, time_appconnect = 3.16 RTT, time_starttransfer = 4.16 RTT, а time_total = 4.17 RTT. Для нового з'єднання TLS 1.2 значення time_namelookup = 1 RTT, time_connect = 2 RTT, time_appconnect = 4.14 RTT, time_starttransfer = 5.15 RTT, а time_total = 5.15 RTT.
+Виміряний RTT становить приблизно 20.3 мс. Для нового з'єднання TLS 1.3 значення time_namelookup = 1 RTT, time_connect = 2 RTT, time_appconnect = 3.16 RTT, time_starttransfer = 4.16 RTT, а time_total = 4.17 RTT. Для нового з'єднання TLS 1.2 значення time_namelookup = 1 RTT, time_connect = 2 RTT, time_appconnect = 4.14 RTT, time_starttransfer = 5.15 RTT, а time_total = 5.15 RTT. Відхилення від цілих значень RTT пояснюються затримками обробки на клієнті та сервері.
 
 2. Чому `time_namelookup` не близький до нуля, хоча резолвер уже має ім'я в кеші? За яких умов він був би приблизно вдвічі більшим?<br>
 
