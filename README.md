@@ -371,16 +371,67 @@ id-ecPublicKey це тип відкритого ключа сервера, RSA-S
 Вивід кроку 4.1:
 
 ```text
-
+=== f1.se-201-28.lab
+curl: (60) SSL: no alternative certificate subject name matches target host name 'f1.se-201-28.lab'
+Certificate chain
+ 0 s:CN = intra.se-201-28.lab
+   i:O = OPISM Lab, CN = OPISM Stand Intermediate CA
+   v:NotBefore: Nov 11 14:14:54 2026 GMT; NotAfter: Feb  9 14:14:54 2027 GMT
+ 1 s:O = OPISM Lab, CN = OPISM Stand Intermediate CA
+   i:O = OPISM Lab, CN = OPISM Stand Root CA
+   v:NotBefore: Nov 11 14:14:53 2026 GMT; NotAfter: Nov 10 14:14:53 2031 GMT
+---
+Verify return code: 0 (ok)
+=== f2.se-201-28.lab
+server: web, f2
+Certificate chain
+ 0 s:CN = f2.se-201-28.lab
+   i:O = OPISM Lab, CN = OPISM Stand Intermediate CA
+   v:NotBefore: Nov 11 14:14:54 2026 GMT; NotAfter: Feb  9 14:14:54 2027 GMT
+ 1 s:O = OPISM Lab, CN = OPISM Stand Intermediate CA
+   i:O = OPISM Lab, CN = OPISM Stand Root CA
+   v:NotBefore: Nov 11 14:14:53 2026 GMT; NotAfter: Nov 10 14:14:53 2031 GMT
+---
+Verify return code: 0 (ok)
+=== f3.se-201-28.lab
+curl: (60) SSL certificate problem: unable to get local issuer certificate
+Certificate chain
+ 0 s:CN = f3.se-201-28.lab
+   i:O = Foreign Org, CN = Foreign Intermediate CA
+   v:NotBefore: Nov 11 14:14:54 2026 GMT; NotAfter: Feb  9 14:14:54 2027 GMT
+ 1 s:O = Foreign Org, CN = Foreign Intermediate CA
+   i:O = Foreign Org, CN = Foreign Root CA
+   v:NotBefore: Nov 11 14:14:53 2026 GMT; NotAfter: Nov 10 14:14:53 2031 GMT
+---
+Verify return code: 20 (unable to get local issuer certificate)
+=== f4.se-201-28.lab
+curl: (60) SSL certificate problem: certificate has expired
+Certificate chain
+ 0 s:CN = f4.se-201-28.lab
+   i:O = OPISM Lab, CN = OPISM Stand Intermediate CA
+   v:NotBefore: Apr 25 14:14:54 2026 GMT; NotAfter: Oct 22 14:14:54 2026 GMT
+ 1 s:O = OPISM Lab, CN = OPISM Stand Intermediate CA
+   i:O = OPISM Lab, CN = OPISM Stand Root CA
+   v:NotBefore: Nov 11 14:14:53 2026 GMT; NotAfter: Nov 10 14:14:53 2031 GMT
+---
+Verify return code: 10 (certificate has expired)
+=== f5.se-201-28.lab
+curl: (60) SSL certificate problem: unable to get local issuer certificate
+Certificate chain
+ 0 s:CN = f5.se-201-28.lab
+   i:O = OPISM Lab, CN = OPISM Stand Intermediate CA
+   v:NotBefore: Nov 11 14:14:54 2026 GMT; NotAfter: Feb  9 14:14:54 2027 GMT
+---
+Verify return code: 21 (unable to verify the first certificate)
 ```
 
 | Сервер | Помилка `curl` | `Verify return code` | Яка перевірка не пройшла | Рядок виводу, що це доводить | Що має змінити власник сервера |
 |---|---|---|---|---|---|
-| f1 | | | | | |
-| f2 | | | | | |
-| f3 | | | | | |
-| f4 | | | | | |
-| f5 | | | | | |
+| f1 | 60 | 0 | відповідність SAN | no alternative certificate subject name matches target host name 'f1.se-201-28.lab' | встановити відповідний сертифікат сервера |
+| f2 | — | 0 | — | server: web, f2 | — |
+| f3 | 60 | 10 | довіра до центру сертифікації | i:O = Foreign Org, CN = Foreign Root CA | отримати сертифікат від центру сертифікації, якому довіряє клієнт |
+| f4 | 60 | 20 | строк дії сертифікати | NotAfter: Nov 10 14:14:53 2031 GMT | встановити новий сертифікат |
+| f5 | 60 | 21 | повнота сертифіката | Certificate chain не містить запису 1 | налаштувати сервер для надсилання проміжного сертифікату |
 
 1. Для сервера з помилкою `unable to get local issuer certificate` визначте, яка це несправність: сервер не надсилає проміжний сертифікат чи сертифікат виданий центром, якому клієнт не довіряє. Чим ці дві несправності відрізняються у виводі `openssl s_client`?
 
